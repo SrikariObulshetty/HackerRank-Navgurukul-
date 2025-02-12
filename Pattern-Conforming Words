@@ -1,0 +1,54 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    public static void pattern(ArrayList<String>al){
+        String pattern=al.get(al.size()-1);
+        int l=pattern.length();
+         HashMap<Character,Character>map1=new HashMap<>();
+        HashMap<Character,Character>map2=new HashMap<>();
+        for(int i=0;i<al.size()-1;i++){
+            if(l==al.get(i).length()){
+                String word=al.get(i);
+                int j=0;
+                for(;j<l;j++){
+                    char c1=pattern.charAt(j);
+                    char c2=word.charAt(j);
+                    if(map1.containsKey(c1) && map1.get(c1)!=c2){
+                        break;
+                    }
+                    else if(!map1.containsKey(c1)){
+                        map1.put(c1, c2);
+                    }
+                    if(map2.containsKey(c2) && map2.get(c2)!=c1){
+                        break;
+                    }
+                    else if(!map2.containsKey(c2)){
+                        map2.put(c2, c1);
+                    }
+                }
+                if(j==l){
+                    System.out.println(word);
+                }
+                
+            }
+            map1.clear();
+            map2.clear();
+        } 
+    }
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner scn=new Scanner(System.in);
+        String s="";
+        ArrayList<String>al=new ArrayList<>();
+        while(scn.hasNext()){
+            s=scn.nextLine();
+            al.add(s);
+        }
+        pattern(al);
+    }
+}
